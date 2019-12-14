@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Game from './Game'
 
-const App: React.FC = () => {
+const App = () => {
+  const [running, setRunning] = React.useState(false)
+  const [speed, setSpeed] = React.useState(1000)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>
+        <button onClick={() => setRunning((running) => !running)}>
+          {running ? 'Stop' : 'Start'}
+        </button>{' '}
+        Every{' '}
+        <input
+          placeholder="Input the speed"
+          onChange={({ target }) => setSpeed(parseInt(target.value, 10))}
+          value={speed}
+          type="number"
+        />{' '}
+        milliseconds
+      </p>
+      <Game running={running} speed={speed} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
